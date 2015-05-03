@@ -43,6 +43,17 @@
   self.searchController.delegate = self;
   self.searchController.searchResultsDataSource = self;
   self.tableView.tableHeaderView = self.searchBar;
+  
+  self.definesPresentationContext = YES;
+  self.contacts = [[NSMutableSet alloc] init];
+  self.filteredContacts = [NSMutableArray array];
+  
+  NSArray* types = @[@"Lead", @"Contact"];
+  for (NSString* type in types) {
+    NSString* query = [NSString stringWithFormat:@"SELECT Id, Name, MobilePhone FROM %@", type];
+    SFRestRequest* request = [[SFRestAPI sharedInstance] requestForQuery:query];
+    [[SFRestAPI sharedInstance] send:request delegate:self];
+  }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -161,8 +172,12 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": @(7), @"contact": self.contacts.allObjects[0] }];
-  [self presentViewController:callFlowViewController animated:NO completion:nil];
+//  NSCharacterSet* illegalCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890*#"] invertedSet];
+//  NSString* phoneNumber = [[self.contacts.allObjects[indexPath.item][@"MobilePhone"] componentsSeparatedByCharactersInSet:illegalCharSet] componentsJoinedByString:@""];
+  
+  NSString* phoneNumber = @"6158296774";
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@", phoneNumber]]];
+  self.callingState = @"willPromptCall";
 }
 
 #pragma mark - Calling state
@@ -173,9 +188,7 @@
 }
 
 - (void)resetCallingState {
-  if ([self.callingState isEqualToString:@"promptCallComplete"]) {
-    self.callingState = @"inactive";
-  }
+  self.callingState = @"inactive";
 }
 
 
@@ -194,14 +207,16 @@
   NSLog(@"FOREGROUND FOREGROUND FOREGROUND");
   if ([self.callingState isEqualToString:@"didPromptCall"]) {
     self.callingState = @"promptCallComplete";
-    [self performSelector:@selector(resetCallingState) withObject:nil afterDelay:2];
   } else if ([self.callingState isEqualToString:@"didCall"]) {
     NSInteger duration = -[self.callStartTime timeIntervalSinceNow];
+    NSString* durationString = [NSString stringWithFormat:@"%is", duration];
+    
     NSIndexPath* selectedIndexPath = self.tableView.indexPathForSelectedRow;
     NSDictionary* selectedContact = [self.contacts.allObjects objectAtIndex:selectedIndexPath.item];
-    HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": @(duration), @"contact": selectedContact }];
-    [self presentViewController:callFlowViewController animated:NO completion:nil];
-    [self resetCallingState];
+    HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": durationString, @"contact": selectedContact }];
+    [self presentViewController:callFlowViewController animated:NO completion:^{
+      [self performSelector:@selector(resetCallingState) withObject:nil afterDelay:0];
+    }];
   }
 }
 
