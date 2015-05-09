@@ -5,6 +5,7 @@ target 'HighDial' do
 
 pod 'ReactiveCocoa'
 pod 'Pop'
+pod 'Intercom'
 
 end
 

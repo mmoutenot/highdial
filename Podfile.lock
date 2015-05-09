@@ -1,4 +1,5 @@
 PODS:
+  - Intercom (2.2.2)
   - pop (1.0.7)
   - ReactiveCocoa (2.4.7):
     - ReactiveCocoa/UI (= 2.4.7)
@@ -9,11 +10,13 @@ PODS:
     - ReactiveCocoa/Core
 
 DEPENDENCIES:
+  - Intercom
   - Pop
   - ReactiveCocoa
 
 SPEC CHECKSUMS:
+  Intercom: 221cda56693d6e31fd3edf4979729cdd2920363a
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.36.4

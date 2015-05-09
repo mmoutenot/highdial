@@ -1,5 +1,6 @@
-#import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Intercom/Intercom.h>
 #import <SalesforceSDKCore/SFPushNotificationManager.h>
 #import <SalesforceSDKCore/SFDefaultUserManagementViewController.h>
 #import <SalesforceSDKCore/SalesforceSDKManager.h>
@@ -10,8 +11,8 @@
 #import "AppDelegate.h"
 #import "HDRootViewController.h"
   
-static NSString * const RemoteAccessConsumerKey = @"3MVG9sG9Z3Q1RlbflJ2Y5ohJyWzuuz.M5GSsf9NdmN3I.zY1IEW2pSMdfFIxHlkAvzsb8QTZFO0d_xYj7N_nK";
-static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect/oauth/done";
+static NSString* const RemoteAccessConsumerKey = @"3MVG9sG9Z3Q1RlbflJ2Y5ohJyWzuuz.M5GSsf9NdmN3I.zY1IEW2pSMdfFIxHlkAvzsb8QTZFO0d_xYj7N_nK";
+static NSString* const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/done";
 
 @interface AppDelegate ()
 
@@ -62,11 +63,12 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
   return self;
 }
 
-- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   [self initializeAppViewState];
+  
+  [Intercom setApiKey:@"ios_sdk-88a79a61d5d3ec6fe21c55ad084e0d5080fa8016" forAppId:@"t3a13atb"];
   
   [Fabric with:@[CrashlyticsKit]];
   // If you wish to register for push notifications, uncomment the line below.  Note that,
@@ -80,8 +82,7 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
   return YES;
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
   //
   // Uncomment the code below to register your device token with the push notification manager
   //
@@ -92,27 +93,27 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
   //
 }
 
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
   // Respond to any push notification registration errors here.
 }
 
 #pragma mark - Private methods
 
-- (void)initializeAppViewState
-{
+- (void)initializeAppViewState {
   [self.window makeKeyAndVisible];
 }
 
-- (void)setupRootViewController
-{
+- (void)setupRootViewController {
+  SFUserAccount* user = [SFUserAccountManager sharedInstance].currentUser;
+  [Intercom registerUserWithUserId:user.idData.userId];
+  [Intercom updateUserWithAttributes:@{ @"email": user.email, @"name": user.fullName }];
+  
   HDRootViewController* rootVC = [[HDRootViewController alloc] initWithNibName:nil bundle:nil];
   UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:rootVC];
   self.window.rootViewController = navVC;
 }
 
-- (void)resetViewState:(void (^)(void))postResetBlock
-{
+- (void)resetViewState:(void (^)(void))postResetBlock {
   if ([self.window.rootViewController presentedViewController]) {
     [self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
       postResetBlock();
@@ -122,9 +123,9 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
   }
 }
 
-- (void)handleSdkManagerLogout
-{
+- (void)handleSdkManagerLogout {
   [self log:SFLogLevelDebug msg:@"SFAuthenticationManager logged out.  Resetting app."];
+  [Intercom reset];
   [self resetViewState:^{
     [self initializeAppViewState];
     
@@ -153,10 +154,10 @@ static NSString * const OAuthRedirectURI        = @"testsfdc:///mobilesdk/detect
 }
 
 - (void)handleUserSwitch:(SFUserAccount*)fromUser
-                  toUser:(SFUserAccount*)toUser
-{
+                  toUser:(SFUserAccount*)toUser {
   [self log:SFLogLevelDebug format:@"SFUserAccountManager changed from user %@ to %@.  Resetting app.",
    fromUser.userName, toUser.userName];
+  [Intercom reset];
   [self resetViewState:^{
     [self initializeAppViewState];
     [[SalesforceSDKManager sharedManager] launch];
