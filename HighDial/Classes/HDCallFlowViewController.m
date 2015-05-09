@@ -42,7 +42,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
       @"header": [NSString stringWithFormat:@"Did you talk with %@?", contactName],
       @"options": @[
         [[HDOption alloc] initWithText:@"Yes" icon:[UIImage imageNamed:@"ContactIcon"] nextKey:@"callRating"],
-        [[HDOption alloc] initWithText:@"No" icon:[UIImage imageNamed:@"NegativeIcon"] nextKey:@"whoReached"]
+        [[HDOption alloc] initWithText:@"No" icon:[UIImage imageNamed:@"NoIcon"] nextKey:@"whoReached"]
       ]
     };
     [self.flowCards setObject:reachableCard forKey:@"reachable"];
@@ -60,10 +60,10 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
     NSDictionary* callRatingCard = @{
       @"header": @"How would you rate the call?",
       @"options": @[
-        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"BadIcon"] nextKey:@"nextSteps"],
-        [[HDOption alloc] initWithText:@"Okay" icon:[UIImage imageNamed:@"OkayIcon"] nextKey:@"nextSteps"],
+        [[HDOption alloc] initWithText:@"Great" icon:[UIImage imageNamed:@"GreatIcon"] nextKey:@"nextSteps"],
         [[HDOption alloc] initWithText:@"Good" icon:[UIImage imageNamed:@"GoodIcon"] nextKey:@"nextSteps"],
-        [[HDOption alloc] initWithText:@"Awesome" icon:[UIImage imageNamed:@"AwesomeIcon"] nextKey:@"nextSteps"]
+        [[HDOption alloc] initWithText:@"Okay" icon:[UIImage imageNamed:@"OkayIcon"] nextKey:@"nextSteps"],
+        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"BadIcon"] nextKey:@"nextSteps"]
       ]
     };
     [self.flowCards setObject:callRatingCard forKey:@"callRating"];
@@ -84,7 +84,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
         [[HDOption alloc] initWithText:@"Today" icon:[UIImage imageNamed:@"TodayIcon"] nextKey:@"notes"],
         [[HDOption alloc] initWithText:@"Tomorrow" icon:[UIImage imageNamed:@"TomorrowIcon"] nextKey:@"notes"],
         [[HDOption alloc] initWithText:@"Next week" icon:[UIImage imageNamed:@"WeekIcon"] nextKey:@"notes"],
-        [[HDOption alloc] initWithText:@"Next month" icon:[UIImage imageNamed:@"NegativeIcon"] nextKey:@"notes"],
+        [[HDOption alloc] initWithText:@"Next month" icon:[UIImage imageNamed:@"MonthIcon"] nextKey:@"notes"],
         [[HDOption alloc] initWithText:@"Pick a date" icon:[UIImage imageNamed:@"NegativeIcon"] nextKey:@"notes"]
       ]
     };
