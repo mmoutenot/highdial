@@ -63,7 +63,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
         [[HDOption alloc] initWithText:@"Great" icon:[UIImage imageNamed:@"GreatIcon"] nextKey:@"nextSteps"],
         [[HDOption alloc] initWithText:@"Good" icon:[UIImage imageNamed:@"GoodIcon"] nextKey:@"nextSteps"],
         [[HDOption alloc] initWithText:@"Okay" icon:[UIImage imageNamed:@"OkayIcon"] nextKey:@"nextSteps"],
-        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"BadIcon"] nextKey:@"nextSteps"]
+        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"NotGoodIcon"] nextKey:@"nextSteps"]
       ]
     };
     [self.flowCards setObject:callRatingCard forKey:@"callRating"];
@@ -84,8 +84,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
         [[HDOption alloc] initWithText:@"Today" icon:[UIImage imageNamed:@"TodayIcon"] nextKey:@"notes"],
         [[HDOption alloc] initWithText:@"Tomorrow" icon:[UIImage imageNamed:@"TomorrowIcon"] nextKey:@"notes"],
         [[HDOption alloc] initWithText:@"Next week" icon:[UIImage imageNamed:@"WeekIcon"] nextKey:@"notes"],
-        [[HDOption alloc] initWithText:@"Next month" icon:[UIImage imageNamed:@"MonthIcon"] nextKey:@"notes"],
-        [[HDOption alloc] initWithText:@"Pick a date" icon:[UIImage imageNamed:@"NegativeIcon"] nextKey:@"notes"]
+        [[HDOption alloc] initWithText:@"Next month" icon:[UIImage imageNamed:@"MonthIcon"] nextKey:@"notes"]
       ]
     };
     [self.flowCards setObject:whenCard forKey:@"when"];
@@ -117,7 +116,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
 
 - (void)presentCardForKey:(NSString *)cardKey {
   CGSize viewSize = self.view.frame.size;
-  CGRect cardFrame = { viewSize.width * 0.025, viewSize.height * 0.25, viewSize.width * .95, viewSize.height * 0.5 };
+  CGRect cardFrame = { 5.0, kCallFlowViewHeaderHeight + 5.0, viewSize.width - 10.0, viewSize.height - 10.0 - kCallFlowViewHeaderHeight };
   NSDictionary* card = self.flowCards[cardKey];
   HDCallFlowCardViewController* currentCard = [[HDCallFlowCardViewController alloc] initWithFrame:cardFrame key:cardKey title:card[@"header"] options:card[@"options"] delegate:self];
   [self present:currentCard];

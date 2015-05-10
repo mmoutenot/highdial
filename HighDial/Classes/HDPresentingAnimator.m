@@ -19,13 +19,7 @@
   fromView.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
   fromView.userInteractionEnabled = NO;
 
-  UIView *dimmingView = [[UIView alloc] initWithFrame:fromView.bounds];
-  dimmingView.backgroundColor = [UIColor blackColor];
-  dimmingView.layer.opacity = 0.0;
-
   UIView *toView = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey].view;
-
-  [fromView addSubview:dimmingView];
   [transitionContext.containerView addSubview:toView];
 
   POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionY];
@@ -39,12 +33,8 @@
   scaleAnimation.springBounciness = 20;
   scaleAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(1.2, 1.4)];
 
-  POPBasicAnimation *opacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
-  opacityAnimation.toValue = @(0.4);
-
   [toView.layer pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
   [toView.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnimation"];
-  [dimmingView.layer pop_addAnimation:opacityAnimation forKey:@"opacityAnimation"];
 }
 
 @end

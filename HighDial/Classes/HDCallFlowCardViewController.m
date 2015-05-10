@@ -9,7 +9,8 @@
 #import "HDCallFlowOptionCell.h"
 #import "HDOption.h"
 
-static CGFloat kCardViewTitleMargin = 20.0;
+static CGFloat kCardViewTitleMarginVertical = 25.0;
+static CGFloat kCardViewTitleMarginHorizontal = 40.0;
 static CGFloat kCardViewOptionMaxPerRow = 5.0;
 static NSString* kCardViewOptionCellIdentifier = @"HDCallFlowOptionCell";
 
@@ -35,27 +36,27 @@ static NSString* kCardViewOptionCellIdentifier = @"HDCallFlowOptionCell";
     self.view.frame = frame;
     CGSize viewSize = self.view.frame.size;
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.layer.cornerRadius = 4.0;
+    self.view.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.view.layer.borderWidth = 1.0;
     
-    CGRect titleLabelFrame = {0, kCardViewTitleMargin, viewSize.width, 20.0};
+    CGRect titleLabelFrame = {kCardViewTitleMarginHorizontal, kCardViewTitleMarginVertical, viewSize.width - kCardViewTitleMarginHorizontal * 2, 50.0};
     self.titleLabel = [[UILabel alloc] initWithFrame:titleLabelFrame];
     self.titleLabel.text = title;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.numberOfLines = 0;
     [self.view addSubview:self.titleLabel];
     
     UICollectionViewFlowLayout* optionCollectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    CGFloat optionItemWidth = viewSize.width / MIN(options.count + 1, kCardViewOptionMaxPerRow);
-    CGFloat optionItemHeight = optionItemWidth * 1.25;
+    CGFloat optionItemWidth = viewSize.width;
+    CGFloat optionItemHeight = 80;
     CGSize optionItemSize = { optionItemWidth, optionItemHeight };
     optionCollectionFlowLayout.itemSize = optionItemSize;
     optionCollectionFlowLayout.minimumInteritemSpacing = 0.0;
-    optionCollectionFlowLayout.minimumLineSpacing = 25.0;
+    optionCollectionFlowLayout.minimumLineSpacing = 20.0;
     
-    CGFloat insetDimension = optionItemWidth / 4.0;
-    optionCollectionFlowLayout.sectionInset = UIEdgeInsetsMake(0, insetDimension, 0, insetDimension);
-    
-    CGFloat optionCollectionHeight = ceilf(options.count / kCardViewOptionMaxPerRow) * optionItemHeight;
-    CGFloat optionCollectionY = viewSize.height / 2.0 - optionCollectionHeight / 2.0;
-    CGRect optionCollectionFrame = { 0, optionCollectionY, viewSize.width, optionCollectionHeight};
+    CGFloat optionCollectionY = titleLabelFrame.origin.y + titleLabelFrame.size.height;
+    CGRect optionCollectionFrame = { 0, optionCollectionY, viewSize.width, viewSize.height - optionCollectionY - 20.0 };
     self.optionCollectionView = [[UICollectionView alloc] initWithFrame:optionCollectionFrame collectionViewLayout:optionCollectionFlowLayout];
     self.optionCollectionView.delegate = self;
     self.optionCollectionView.dataSource = self;
