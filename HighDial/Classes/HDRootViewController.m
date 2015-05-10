@@ -1,3 +1,5 @@
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 #import "HDRootViewController.h"
 #import "HDCallFlowViewController.h"
 #import "SFRestAPI.h"
@@ -7,7 +9,7 @@
 
 @property (nonatomic) UITableViewController* filteredContactsTableController;
 @property (nonatomic) NSMutableArray* filteredContacts;
-@property (nonatomic) NSMutableSet* contacts;
+@property (nonatomic) NSMutableArray* contacts;
 
 @property (nonatomic) UISearchDisplayController* searchController;
 @property (nonatomic) UISearchBar* searchBar;
@@ -45,7 +47,7 @@
   self.tableView.tableHeaderView = self.searchBar;
   
   self.definesPresentationContext = YES;
-  self.contacts = [[NSMutableSet alloc] init];
+  self.contacts = [[NSMutableArray alloc] init];
   self.filteredContacts = [NSMutableArray array];
   
   NSArray* types = @[@"Lead", @"Contact"];
@@ -62,7 +64,7 @@
 
 #pragma mark - UISearchBarDelegate
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar {
   [searchBar resignFirstResponder];
 }
 
@@ -88,7 +90,7 @@
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
   [self.filteredContacts removeAllObjects];
   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.Name contains[c] %@", searchText];
-  self.filteredContacts = [NSMutableArray arrayWithArray:[[self.contacts allObjects] filteredArrayUsingPredicate:predicate]];
+  self.filteredContacts = [NSMutableArray arrayWithArray:[self.contacts filteredArrayUsingPredicate:predicate]];
   NSLog(@"%lu", (unsigned long)self.filteredContacts.count);
 }
 
@@ -97,9 +99,13 @@
 - (void)request:(SFRestRequest*)request didLoadResponse:(id)jsonResponse {
   NSArray* records = [jsonResponse objectForKey:@"records"];
   NSLog(@"request:didLoadResponse: #records: %lu", (unsigned long)records.count);
-  NSLog(@"%@",records);
   [self.contacts addObjectsFromArray:records];
-  [self.filteredContacts addObjectsFromArray:[self.contacts allObjects]];
+  self.contacts = [[self.contacts sortedArrayUsingComparator:^NSComparisonResult(NSDictionary* contactA, NSDictionary* contactB) {
+    NSString* nameA = contactA[@"Name"];
+    NSString* nameB = contactB[@"Name"];
+    return [nameA compare:nameB];
+  }] mutableCopy];
+  [self.filteredContacts addObjectsFromArray:self.contacts];
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.tableView reloadData];
   });
@@ -151,10 +157,8 @@
   if (self.searchController.isActive) {
     obj = [self.filteredContacts objectAtIndex:indexPath.row];
   } else {
-    obj = [[self.contacts allObjects] objectAtIndex:indexPath.row];
+    obj = [self.contacts objectAtIndex:indexPath.row];
   }
-  
-  NSLog(@"%@", obj);
   
   //if you want to add an image to your cell, here's how
   UIImage* image = [UIImage imageNamed:@"icon.png"];
@@ -212,7 +216,7 @@
     NSString* durationString = [NSString stringWithFormat:@"%is", duration];
     
     NSIndexPath* selectedIndexPath = self.tableView.indexPathForSelectedRow;
-    NSDictionary* selectedContact = [self.contacts.allObjects objectAtIndex:selectedIndexPath.item];
+    NSDictionary* selectedContact = [self.contacts objectAtIndex:selectedIndexPath.item];
     HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": durationString, @"contact": selectedContact }];
     [self presentViewController:callFlowViewController animated:NO completion:^{
       [self performSelector:@selector(resetCallingState) withObject:nil afterDelay:0];
