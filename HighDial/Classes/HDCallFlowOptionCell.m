@@ -33,8 +33,6 @@ static CGFloat kCallFlowOptionCellTextSize = 14.0;
     [self.contentView addSubview:self.iconView];
     
     self.textLabel = [[UILabel alloc] init];
-    self.textLabel.bounds = CGRectMake(0, 0, viewSize.width, kCallFlowOptionCellTextSize * 1.25);
-    self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.font = [UIFont systemFontOfSize:kCallFlowOptionCellTextSize];
     [self.contentView addSubview:self.textLabel];
   }
@@ -49,10 +47,11 @@ static CGFloat kCallFlowOptionCellTextSize = 14.0;
   
   UIImage* image = option.icon;
   self.iconView.image = image;
-  self.iconView.frame = CGRectMake(0, 0, viewSize.width, viewSize.width);
+  self.iconView.frame = CGRectMake(40.0, 0, image.size.width, image.size.height);
   
+  CGFloat textHeight = kCallFlowOptionCellTextSize * 1.25;
   self.textLabel.text = option.text;
-  self.textLabel.center = CGPointMake(viewCenter.x, viewSize.height - self.textLabel.bounds.size.height / 2.0);
+  self.textLabel.frame = CGRectMake(60 + image.size.width, viewCenter.y - textHeight / 2.0, viewSize.width - 60.0 - image.size.width, textHeight);
 }
 
 @end

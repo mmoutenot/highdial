@@ -50,6 +50,11 @@
   self.contacts = [[NSMutableArray alloc] init];
   self.filteredContacts = [NSMutableArray array];
   
+  HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": @"7s", @"contact": @{ @"Name": @"Marshall Moutenot" }}];
+  [self presentViewController:callFlowViewController animated:NO completion:^{
+    [self performSelector:@selector(resetCallingState) withObject:nil afterDelay:0];
+  }];
+  
   NSArray* types = @[@"Lead", @"Contact"];
   for (NSString* type in types) {
     NSString* query = [NSString stringWithFormat:@"SELECT Id, Name, MobilePhone FROM %@", type];

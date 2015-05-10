@@ -117,7 +117,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
 
 - (void)presentCardForKey:(NSString *)cardKey {
   CGSize viewSize = self.view.frame.size;
-  CGRect cardFrame = { viewSize.width * 0.025, viewSize.height * 0.25, viewSize.width * .95, viewSize.height * 0.5 };
+  CGRect cardFrame = { 5.0, kCallFlowViewHeaderHeight + 5.0, viewSize.width - 10.0, viewSize.height - 10.0 - kCallFlowViewHeaderHeight };
   NSDictionary* card = self.flowCards[cardKey];
   HDCallFlowCardViewController* currentCard = [[HDCallFlowCardViewController alloc] initWithFrame:cardFrame key:cardKey title:card[@"header"] options:card[@"options"] delegate:self];
   [self present:currentCard];
