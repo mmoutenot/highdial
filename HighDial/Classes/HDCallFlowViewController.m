@@ -63,7 +63,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
         [[HDOption alloc] initWithText:@"Great" icon:[UIImage imageNamed:@"GreatIcon"] nextKey:@"nextSteps"],
         [[HDOption alloc] initWithText:@"Good" icon:[UIImage imageNamed:@"GoodIcon"] nextKey:@"nextSteps"],
         [[HDOption alloc] initWithText:@"Okay" icon:[UIImage imageNamed:@"OkayIcon"] nextKey:@"nextSteps"],
-        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"BadIcon"] nextKey:@"nextSteps"]
+        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"NotGoodIcon"] nextKey:@"nextSteps"]
       ]
     };
     [self.flowCards setObject:callRatingCard forKey:@"callRating"];
@@ -84,8 +84,7 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
         [[HDOption alloc] initWithText:@"Today" icon:[UIImage imageNamed:@"TodayIcon"] nextKey:@"notes"],
         [[HDOption alloc] initWithText:@"Tomorrow" icon:[UIImage imageNamed:@"TomorrowIcon"] nextKey:@"notes"],
         [[HDOption alloc] initWithText:@"Next week" icon:[UIImage imageNamed:@"WeekIcon"] nextKey:@"notes"],
-        [[HDOption alloc] initWithText:@"Next month" icon:[UIImage imageNamed:@"MonthIcon"] nextKey:@"notes"],
-        [[HDOption alloc] initWithText:@"Pick a date" icon:[UIImage imageNamed:@"NegativeIcon"] nextKey:@"notes"]
+        [[HDOption alloc] initWithText:@"Next month" icon:[UIImage imageNamed:@"MonthIcon"] nextKey:@"notes"]
       ]
     };
     [self.flowCards setObject:whenCard forKey:@"when"];

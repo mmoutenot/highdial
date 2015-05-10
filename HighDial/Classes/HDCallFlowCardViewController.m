@@ -36,6 +36,9 @@ static NSString* kCardViewOptionCellIdentifier = @"HDCallFlowOptionCell";
     self.view.frame = frame;
     CGSize viewSize = self.view.frame.size;
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.layer.cornerRadius = 4.0;
+    self.view.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.view.layer.borderWidth = 1.0;
     
     CGRect titleLabelFrame = {kCardViewTitleMarginHorizontal, kCardViewTitleMarginVertical, viewSize.width - kCardViewTitleMarginHorizontal * 2, 50.0};
     self.titleLabel = [[UILabel alloc] initWithFrame:titleLabelFrame];
