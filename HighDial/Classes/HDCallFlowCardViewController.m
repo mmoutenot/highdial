@@ -35,7 +35,7 @@ static NSString* kCardViewOptionCellIdentifier = @"HDCallFlowOptionCell";
     
     self.view.frame = frame;
     CGSize viewSize = self.view.frame.size;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [HDColor whiteColor];
     self.view.layer.cornerRadius = 4.0;
     self.view.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.view.layer.borderWidth = 1.0;
@@ -86,6 +86,8 @@ static NSString* kCardViewOptionCellIdentifier = @"HDCallFlowOptionCell";
 - (void)collectionView:(UICollectionView*)collectionView didSelectItemAtIndexPath:(NSIndexPath*)indexPath {
   HDOption* option = self.options[indexPath.item];
   [self.delegate optionSelected:option forKey:self.key];
+  [self.view removeFromSuperview];
+  [self removeFromParentViewController];
 }
 
 #pragma mark - Actions

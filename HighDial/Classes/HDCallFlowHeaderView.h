@@ -10,6 +10,8 @@
 
 @interface HDCallFlowHeaderView : UIView
 
+@property (nonatomic, readonly) UIButton* cancelButton;
+
 - (instancetype)initWithFrame:(CGRect)frame callDuration:(NSString*)callDuration;
 
 @end

@@ -26,7 +26,7 @@
   positionAnimation.fromValue = @(toView.center.y + toView.frame.size.height / 2.0);
   positionAnimation.springBounciness = 12;
   [positionAnimation setCompletionBlock:^(POPAnimation *anim, BOOL finished) {
-      [transitionContext completeTransition:YES];
+    [transitionContext completeTransition:YES];
   }];
 
   POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];

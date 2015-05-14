@@ -33,7 +33,8 @@ static CGFloat kCallFlowOptionCellTextSize = 14.0;
     [self.contentView addSubview:self.iconView];
     
     self.textLabel = [[UILabel alloc] init];
-    self.textLabel.font = [UIFont systemFontOfSize:kCallFlowOptionCellTextSize];
+    self.textLabel.font = [UIFont openSansFontOfSize:kCallFlowOptionCellTextSize];
+    self.textLabel.textColor = [HDColor colorText];
     [self.contentView addSubview:self.textLabel];
   }
   return self;

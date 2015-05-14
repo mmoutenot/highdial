@@ -94,13 +94,14 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor lightGrayColor];
+  self.view.backgroundColor = [HDColor colorBackground];
   
   CGSize viewSize = self.view.frame.size;
   
   CGRect headerFrame = { 0, 0, viewSize.width, kCallFlowViewHeaderHeight };
   HDCallFlowHeaderView* headerView = [[HDCallFlowHeaderView alloc] initWithFrame:headerFrame callDuration:self.callData[@"duration"]];
   [self.view addSubview:headerView];
+  [headerView.cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -108,10 +109,9 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
 }
 
 - (void)present:(UIViewController*)viewController {
-  viewController.transitioningDelegate = self;
-  viewController.modalPresentationStyle = UIModalPresentationCustom;
-
-  [self presentViewController:viewController animated:YES completion:nil];
+  [self addChildViewController:viewController];
+  [self.view addSubview:viewController.view];
+  [viewController didMoveToParentViewController:self];
 }
 
 - (void)presentCardForKey:(NSString *)cardKey {
@@ -133,8 +133,6 @@ static CGFloat kCallFlowViewHeaderHeight = 80.0;
   } else if ([key isEqualToString:@"nextSteps"]) {
   } else if ([key isEqualToString:@"when"]) {
   }
-  
-  [self dismiss];
   
   if ([option.nextKey isEqualToString:@"notes"]) {
     [self dismiss];

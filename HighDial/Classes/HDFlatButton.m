@@ -48,8 +48,7 @@
 	[self setTitleColor:[UIColor whiteColor]
              forState:UIControlStateNormal];
   
-	self.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium"
-                                         size:22];
+	self.titleLabel.font = [UIFont openSansFontOfSize:22];
 
 	[self addTarget:self action:@selector(scaleToSmall)
 	  forControlEvents:UIControlEventTouchDown | UIControlEventTouchDragEnter];
