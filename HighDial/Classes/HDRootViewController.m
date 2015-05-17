@@ -50,11 +50,6 @@
   self.contacts = [[NSMutableArray alloc] init];
   self.filteredContacts = [NSMutableArray array];
   
-  HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": @"7s", @"contact": @{ @"Id": @1, @"Name": @"Marshall Moutenot" }}];
-  [self presentViewController:callFlowViewController animated:NO completion:^{
-    [self performSelector:@selector(resetCallingState) withObject:nil afterDelay:0];
-  }];
-  
   NSArray* types = @[@"Lead", @"Contact"];
   for (NSString* type in types) {
     NSString* query = [NSString stringWithFormat:@"SELECT Id, Name, MobilePhone FROM %@", type];
@@ -222,7 +217,7 @@
     
     NSIndexPath* selectedIndexPath = self.tableView.indexPathForSelectedRow;
     NSDictionary* selectedContact = [self.contacts objectAtIndex:selectedIndexPath.item];
-    HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": durationString, @"contact": selectedContact }];
+    HDCallFlowViewController* callFlowViewController = [[HDCallFlowViewController alloc] initWithCallData:@{ @"duration": @(duration), @"durationString": durationString, @"contact": selectedContact }];
     [self presentViewController:callFlowViewController animated:NO completion:^{
       [self performSelector:@selector(resetCallingState) withObject:nil afterDelay:0];
     }];

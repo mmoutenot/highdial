@@ -106,7 +106,7 @@ static NSString* const notesCardKey = @"notes";
   CGSize viewSize = self.view.frame.size;
   
   CGRect headerFrame = { 0, 0, viewSize.width, kCallFlowViewHeaderHeight };
-  HDCallFlowHeaderView* headerView = [[HDCallFlowHeaderView alloc] initWithFrame:headerFrame callDuration:self.callData[@"duration"]];
+  HDCallFlowHeaderView* headerView = [[HDCallFlowHeaderView alloc] initWithFrame:headerFrame callDuration:self.callData[@"durationString"]];
   [self.view addSubview:headerView];
   [headerView.cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -149,13 +149,18 @@ static NSString* const notesCardKey = @"notes";
   NSDictionary* contactData = self.callData[@"contact"];
   NSString* subject = [NSString stringWithFormat:@"Call - %@", self.callData[reachableCardKey]];
   NSString* rating = [NSString stringWithFormat:@"Rating: %@", self.callData[callRatingCardKey]];
+  NSString* followUp = @"No follow up needed.";
+  if (![self.callData[nextStepsCardKey] isEqualToString:@"none"]) {
+    followUp = [NSString stringWithFormat:@"Follow up via %@ %@", self.callData[nextStepsCardKey], self.callData[whenCardKey]];
+  }
   
   NSDictionary* taskParams = @{
     @"WhoId": contactData[@"Id"],
     @"Subject": subject,
     @"CallDurationInSeconds": self.callData[@"duration"],
-    @"Description": rating
+    @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n--\nLogged with Highdial", rating, followUp]
   };
+  
   SFRestRequest* request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Task" fields:taskParams];
   
   [[SFRestAPI sharedInstance] send:request delegate:self];
