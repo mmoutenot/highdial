@@ -4,7 +4,7 @@
 target 'HighDial' do
 
 pod 'ReactiveCocoa'
-pod 'Pop'
+pod 'pop'
 pod 'Intercom'
 pod 'OpenSans'
 

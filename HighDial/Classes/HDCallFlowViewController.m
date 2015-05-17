@@ -130,10 +130,12 @@ static NSString* const notesCardKey = @"notes";
 }
 
 - (void)dismiss {
+  [self logCall];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)optionSelected:(HDOption*)option forKey:(NSString*)key {
+  NSLog(@"%@ %@", key, option.logString);
   self.callData[key] = option.logString;
   
   if ([option.nextKey isEqualToString:@"notes"]) {
