@@ -11,6 +11,7 @@
 		311C47AD1ABF2AC3006A359D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311C47AA1ABF2AC3006A359D /* Crashlytics.framework */; };
 		311C47AE1ABF2AC3006A359D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311C47AB1ABF2AC3006A359D /* Fabric.framework */; };
 		311C47AF1ABF2AC3006A359D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 311C47AC1ABF2AC3006A359D /* libc++.dylib */; };
+		31A4308A1B04215300CC88E1 /* HDColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A430891B04215300CC88E1 /* HDColor.m */; };
 		31B56AB51AD34CA800319997 /* HDFlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B56AB41AD34CA800319997 /* HDFlatButton.m */; };
 		31D00CE41AEABCDC00910612 /* HDCallFlowOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D00CE31AEABCDC00910612 /* HDCallFlowOptionCell.m */; };
 		31D00CE71AEABD6E00910612 /* HDOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D00CE61AEABD6E00910612 /* HDOption.m */; };
@@ -61,6 +62,9 @@
 		311C47AA1ABF2AC3006A359D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		311C47AB1ABF2AC3006A359D /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		311C47AC1ABF2AC3006A359D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		31A430881B04215300CC88E1 /* HDColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDColor.h; sourceTree = "<group>"; };
+		31A430891B04215300CC88E1 /* HDColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDColor.m; sourceTree = "<group>"; };
+		31A4308B1B0425F800CC88E1 /* HDPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDPrefixHeader.pch; sourceTree = "<group>"; };
 		31B56AB31AD34CA800319997 /* HDFlatButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDFlatButton.h; sourceTree = "<group>"; };
 		31B56AB41AD34CA800319997 /* HDFlatButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDFlatButton.m; sourceTree = "<group>"; };
 		31D00CE21AEABCDC00910612 /* HDCallFlowOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDCallFlowOptionCell.h; sourceTree = "<group>"; };
@@ -444,26 +448,29 @@
 		824A9E301724E2A900C9BD79 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				31D00CF41AEAD91200910612 /* HDDismissingAnimator.h */,
-				31D00CF51AEAD91200910612 /* HDDismissingAnimator.m */,
-				31D00CF61AEAD91200910612 /* HDPresentingAnimator.h */,
-				31D00CF71AEAD91200910612 /* HDPresentingAnimator.m */,
-				31B56AB31AD34CA800319997 /* HDFlatButton.h */,
-				31B56AB41AD34CA800319997 /* HDFlatButton.m */,
 				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
 				824A9E321724E2A900C9BD79 /* AppDelegate.m */,
-				824A9E341724E45000C9BD79 /* HDRootViewController.h */,
-				824A9E351724E45100C9BD79 /* HDRootViewController.m */,
-				3115F2E41AC3A8C6003744C0 /* HDCallFlowViewController.h */,
-				3115F2E51AC3A8C6003744C0 /* HDCallFlowViewController.m */,
 				31E5F2C31AE4426600152946 /* HDCallFlowCardViewController.h */,
 				31E5F2C41AE4426600152946 /* HDCallFlowCardViewController.m */,
-				31D00CE21AEABCDC00910612 /* HDCallFlowOptionCell.h */,
-				31D00CE31AEABCDC00910612 /* HDCallFlowOptionCell.m */,
-				31D00CE51AEABD6E00910612 /* HDOption.h */,
-				31D00CE61AEABD6E00910612 /* HDOption.m */,
 				31D00CEB1AEACBDB00910612 /* HDCallFlowHeaderView.h */,
 				31D00CEC1AEACBDB00910612 /* HDCallFlowHeaderView.m */,
+				31D00CE21AEABCDC00910612 /* HDCallFlowOptionCell.h */,
+				31D00CE31AEABCDC00910612 /* HDCallFlowOptionCell.m */,
+				3115F2E41AC3A8C6003744C0 /* HDCallFlowViewController.h */,
+				3115F2E51AC3A8C6003744C0 /* HDCallFlowViewController.m */,
+				31A430881B04215300CC88E1 /* HDColor.h */,
+				31A430891B04215300CC88E1 /* HDColor.m */,
+				31D00CF41AEAD91200910612 /* HDDismissingAnimator.h */,
+				31D00CF51AEAD91200910612 /* HDDismissingAnimator.m */,
+				31B56AB31AD34CA800319997 /* HDFlatButton.h */,
+				31B56AB41AD34CA800319997 /* HDFlatButton.m */,
+				31D00CE51AEABD6E00910612 /* HDOption.h */,
+				31D00CE61AEABD6E00910612 /* HDOption.m */,
+				31A4308B1B0425F800CC88E1 /* HDPrefixHeader.pch */,
+				31D00CF61AEAD91200910612 /* HDPresentingAnimator.h */,
+				31D00CF71AEAD91200910612 /* HDPresentingAnimator.m */,
+				824A9E341724E45000C9BD79 /* HDRootViewController.h */,
+				824A9E351724E45100C9BD79 /* HDRootViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -871,6 +878,7 @@
 				31D00CE71AEABD6E00910612 /* HDOption.m in Sources */,
 				824A9DE51724E16400C9BD79 /* main.m in Sources */,
 				31D00CE41AEABCDC00910612 /* HDCallFlowOptionCell.m in Sources */,
+				31A4308A1B04215300CC88E1 /* HDColor.m in Sources */,
 				31E5F2C51AE4426600152946 /* HDCallFlowCardViewController.m in Sources */,
 				824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */,
 				31D00CF81AEAD91200910612 /* HDDismissingAnimator.m in Sources */,
@@ -962,7 +970,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HighDial/HighDial-Prefix.pch";
+				GCC_PREFIX_HEADER = HighDial/Classes/HDPrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/HighDial/Dependencies/SalesforceOAuth/Headers",
 					"$(SRCROOT)/HighDial/Dependencies/SalesforceNetworkSDK/Headers",
@@ -1012,7 +1020,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HighDial/HighDial-Prefix.pch";
+				GCC_PREFIX_HEADER = HighDial/Classes/HDPrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/HighDial/Dependencies/SalesforceOAuth/Headers",
 					"$(SRCROOT)/HighDial/Dependencies/SalesforceNetworkSDK/Headers",

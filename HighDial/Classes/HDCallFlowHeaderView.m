@@ -20,7 +20,7 @@
 - (instancetype)initWithFrame:(CGRect)frame callDuration:(NSString*)callDuration {
   self = [super initWithFrame:frame];
   if (self) {
-    self.backgroundColor = [UIColor blueColor];
+    self.backgroundColor = [HDColor colorPrimary];
     
     CGFloat titleSize = 18.0;
     CGRect titleLabelBounds = { 0, 0, frame.size.width, titleSize * 1.25 };
@@ -28,7 +28,7 @@
     self.titleLabel.bounds = titleLabelBounds;
     self.titleLabel.center = self.center;
     self.titleLabel.text = @"Log Call";
-    self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:titleSize];
+    self.titleLabel.font = [UIFont openSansFontOfSize:titleSize];
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.titleLabel];
@@ -39,10 +39,17 @@
     self.callDurationLabel.bounds = durationLabelBounds;
     self.callDurationLabel.center = CGPointMake(self.titleLabel.center.x, self.titleLabel.center.y + titleLabelBounds.size.height);
     self.callDurationLabel.text = callDuration;
-    self.callDurationLabel.font = [UIFont fontWithName:@"Avenir" size:durationLabelSize];
+    self.callDurationLabel.font = [UIFont openSansFontOfSize:durationLabelSize];
     self.callDurationLabel.textColor = [UIColor whiteColor];
     self.callDurationLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.callDurationLabel];
+    
+    CGSize callButtonSize = CGSizeMake(30.0, 30.0);
+    _cancelButton = [[UIButton alloc] init];
+    self.cancelButton.bounds = CGRectMake(0, 0, callButtonSize.width, callButtonSize.height);
+    self.cancelButton.center = CGPointMake(10.0 + callButtonSize.width / 2.0, 5.0 + self.center.y);
+    [self.cancelButton setImage:[UIImage imageNamed:@"CancelIcon"] forState:UIControlStateNormal];
+    [self addSubview:self.cancelButton];
     
   }
   return self;
