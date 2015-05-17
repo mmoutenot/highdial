@@ -10,12 +10,13 @@
 
 @implementation HDOption
 
-- (instancetype)initWithText:(NSString*)text icon:(UIImage*)icon nextKey:(NSString*)nextKey {
+- (instancetype)initWithText:(NSString*)text icon:(UIImage*)icon nextKey:(NSString*)nextKey logString:(NSString*)logString {
   self = [super init];
   if (self) {
     _text = text;
     _icon = icon;
     _nextKey = nextKey;
+    _logString = logString;
   }
   return self;
 }

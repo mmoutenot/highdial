@@ -13,7 +13,8 @@
 @property (nonatomic, readonly) NSString* text;
 @property (nonatomic, readonly) UIImage* icon;
 @property (nonatomic, readonly) NSString* nextKey;
+@property (nonatomic, readonly) NSString* logString;
 
-- (instancetype)initWithText:(NSString*)text icon:(UIImage*)icon nextKey:(NSString*)nextKey;
+- (instancetype)initWithText:(NSString*)text icon:(UIImage*)icon nextKey:(NSString*)nextKey logString:(NSString*)logString;
 
 @end
