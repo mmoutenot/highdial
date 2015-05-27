@@ -184,6 +184,7 @@ static NSString* const notesCardKey = @"notes";
   NSString* subject = [NSString stringWithFormat:@"Call - %@", self.callData[reachableCardKey]];
   NSString* rating = [NSString stringWithFormat:@"Rating: %@", self.callData[callRatingCardKey]];
   NSString* followUp = @"No follow up needed.";
+  NSString* duration = [NSString stringWithFormat:@"Duration: %@", self.callData[@"durationString"]];
   NSString* notes = [NSString stringWithFormat:@"Notes: %@", self.callData[notesCardKey]];
   if (![self.callData[nextStepsCardKey] isEqualToString:@"none"]) {
     followUp = [NSString stringWithFormat:@"Follow up via %@ %@", self.callData[nextStepsCardKey], self.callData[whenCardKey]];
@@ -192,8 +193,9 @@ static NSString* const notesCardKey = @"notes";
   NSDictionary* taskParams = @{
     @"WhoId": contactData[@"Id"],
     @"Subject": subject,
+    @"Status": @"Completed",
     @"CallDurationInSeconds": self.callData[@"duration"],
-    @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n--\nLogged with Highdial", rating, followUp, notes]
+    @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n%@\n\n--\nLogged with Highdial", rating, followUp, duration, notes]
   };
   
   SFRestRequest* request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Task" fields:taskParams];
