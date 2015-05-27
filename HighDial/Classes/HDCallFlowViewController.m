@@ -86,7 +86,7 @@ static NSString* const notesCardKey = @"notes";
       @"options": @[
         [[HDOption alloc] initWithText:@"Call back" icon:[UIImage imageNamed:@"CallIcon"] nextKey:whenCardKey logString:@"phone"],
         [[HDOption alloc] initWithText:@"Email" icon:[UIImage imageNamed:@"EmailIcon"] nextKey:whenCardKey logString:@"email"],
-        [[HDOption alloc] initWithText:@"None" icon:[UIImage imageNamed:@"NegativeIcon"] nextKey:whenCardKey logString:@"none"]
+        [[HDOption alloc] initWithText:@"None" icon:[UIImage imageNamed:@"NegativeIcon"] nextKey:notesCardKey logString:@"none"]
       ]
     };
     [self.flowCards setObject:nextStepsCard forKey:nextStepsCardKey];
