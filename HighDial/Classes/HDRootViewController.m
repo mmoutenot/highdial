@@ -176,10 +176,9 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-//  NSCharacterSet* illegalCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890*#"] invertedSet];
-//  NSString* phoneNumber = [[self.contacts.allObjects[indexPath.item][@"MobilePhone"] componentsSeparatedByCharactersInSet:illegalCharSet] componentsJoinedByString:@""];
+  NSCharacterSet* illegalCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890*#"] invertedSet];
+  NSString* phoneNumber = [[self.contacts[indexPath.item][@"MobilePhone"] componentsSeparatedByCharactersInSet:illegalCharSet] componentsJoinedByString:@""];
   
-  NSString* phoneNumber = @"6158296774";
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@", phoneNumber]]];
   self.callingState = @"willPromptCall";
 }

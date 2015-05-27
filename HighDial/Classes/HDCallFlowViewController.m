@@ -5,14 +5,17 @@
 //  Created by Marshall Moutenot on 3/25/15.
 //  Copyright (c) 2015 HighDial. All rights reserved.
 //
+#import <Pop/Pop.h>
 
 #import "HDCallFlowViewController.h"
-#import "HDCallFlowCardViewController.h"
+#import "HDOptionsCardViewController.h"
+#import "HDCallFlowNoteCardViewController.h"
 #import "HDCallFlowHeaderView.h"
 #import "HDDismissingAnimator.h"
 #import "HDFlatButton.h"
 #import "HDOption.h"
 #import "HDPresentingAnimator.h"
+#import "HDSuccessBadgeView.h"
 #import "SFRestAPI.h"
 #import "SFRestRequest.h"
 
@@ -32,6 +35,9 @@ static NSString* const notesCardKey = @"notes";
 @property (nonatomic) HDFlatButton* logButton;
 @property (nonatomic) NSMutableDictionary* flowCards;
 @property (nonatomic) NSMutableDictionary* selectedOptions;
+@property (nonatomic) HDCallFlowHeaderView* headerView;
+@property (nonatomic) HDSuccessBadgeView* successView;
+@property (nonatomic) HDCardViewController* currentCard;
 
 @end
 
@@ -49,7 +55,7 @@ static NSString* const notesCardKey = @"notes";
       @"header": [NSString stringWithFormat:@"Did you talk with %@?", contactName],
       @"options": @[
         [[HDOption alloc] initWithText:@"Yes" icon:[UIImage imageNamed:@"ContactIcon"] nextKey:callRatingCardKey logString:@"Connected"],
-        [[HDOption alloc] initWithText:@"No" icon:[UIImage imageNamed:@"NoIcon"] nextKey:whoReachedCardKey logString:@""]
+        [[HDOption alloc] initWithText:@"No" icon:[UIImage imageNamed:@"NoIcon"] nextKey:whoReachedCardKey logString:@"Not Reached"]
       ]
     };
     [self.flowCards setObject:reachableCard forKey:reachableCardKey];
@@ -95,6 +101,11 @@ static NSString* const notesCardKey = @"notes";
       ]
     };
     [self.flowCards setObject:whenCard forKey:whenCardKey];
+    
+    NSDictionary* notesCard = @{
+      @"header": @"Add notes:"
+    };
+    [self.flowCards setObject:notesCard forKey:notesCardKey];
   }
   return self;
 }
@@ -106,9 +117,10 @@ static NSString* const notesCardKey = @"notes";
   CGSize viewSize = self.view.frame.size;
   
   CGRect headerFrame = { 0, 0, viewSize.width, kCallFlowViewHeaderHeight };
-  HDCallFlowHeaderView* headerView = [[HDCallFlowHeaderView alloc] initWithFrame:headerFrame callDuration:self.callData[@"durationString"]];
-  [self.view addSubview:headerView];
-  [headerView.cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+  self.headerView = [[HDCallFlowHeaderView alloc] initWithFrame:headerFrame callDuration:self.callData[@"durationString"]];
+  [self.view addSubview:self.headerView];
+  [self.headerView.cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+  [self.headerView.doneButton addTarget:self action:@selector(logCall) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -125,12 +137,31 @@ static NSString* const notesCardKey = @"notes";
   CGSize viewSize = self.view.frame.size;
   CGRect cardFrame = { 5.0, kCallFlowViewHeaderHeight + 5.0, viewSize.width - 10.0, viewSize.height - 10.0 - kCallFlowViewHeaderHeight };
   NSDictionary* card = self.flowCards[cardKey];
-  HDCallFlowCardViewController* currentCard = [[HDCallFlowCardViewController alloc] initWithFrame:cardFrame key:cardKey title:card[@"header"] options:card[@"options"] delegate:self];
+  HDCardViewController* currentCard;
+  if ([cardKey isEqualToString:notesCardKey]) {
+    currentCard = [[HDCallFlowNoteCardViewController alloc] initWithFrame:cardFrame key:cardKey title:card[@"header"] delegate:self];
+    self.headerView.doneButton.hidden = NO;
+  } else {
+    currentCard = [[HDOptionsCardViewController alloc] initWithFrame:cardFrame key:cardKey title:card[@"header"] options:card[@"options"] delegate:self];
+    self.headerView.doneButton.hidden = YES;
+  }
+  self.currentCard = currentCard;
   [self present:currentCard];
 }
 
+- (void)showSuccess {
+  POPSpringAnimation* springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+	springAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.8, 0.8)];
+	springAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+  springAnimation.springBounciness = 18.0;
+  
+  self.successView = [[HDSuccessBadgeView alloc] initWithFrame:self.view.frame];
+  [self.view addSubview:self.successView];
+  
+  [self.successView.layer pop_addAnimation:springAnimation forKey:@"successSpring"];
+}
+
 - (void)dismiss {
-  [self logCall];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -138,18 +169,22 @@ static NSString* const notesCardKey = @"notes";
   NSLog(@"%@ %@", key, option.logString);
   self.callData[key] = option.logString;
   
-  if ([option.nextKey isEqualToString:@"notes"]) {
-    [self dismiss];
-  } else {
-    [self presentCardForKey:option.nextKey];
-  }
+  [self presentCardForKey:option.nextKey];
+}
+
+- (void)notesAdded:(NSString*)notes {
+  self.callData[notesCardKey] = notes;
 }
 
 - (void)logCall{
+  [self.currentCard blur];
+  [self showSuccess];
+  
   NSDictionary* contactData = self.callData[@"contact"];
   NSString* subject = [NSString stringWithFormat:@"Call - %@", self.callData[reachableCardKey]];
   NSString* rating = [NSString stringWithFormat:@"Rating: %@", self.callData[callRatingCardKey]];
   NSString* followUp = @"No follow up needed.";
+  NSString* notes = [NSString stringWithFormat:@"Notes: %@", self.callData[notesCardKey]];
   if (![self.callData[nextStepsCardKey] isEqualToString:@"none"]) {
     followUp = [NSString stringWithFormat:@"Follow up via %@ %@", self.callData[nextStepsCardKey], self.callData[whenCardKey]];
   }
@@ -158,7 +193,7 @@ static NSString* const notesCardKey = @"notes";
     @"WhoId": contactData[@"Id"],
     @"Subject": subject,
     @"CallDurationInSeconds": self.callData[@"duration"],
-    @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n--\nLogged with Highdial", rating, followUp]
+    @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n--\nLogged with Highdial", rating, followUp, notes]
   };
   
   SFRestRequest* request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Task" fields:taskParams];
@@ -174,11 +209,10 @@ static NSString* const notesCardKey = @"notes";
 #pragma mark - SFRestAPIDelegate
 
 - (void)request:(SFRestRequest*)request didLoadResponse:(id)jsonResponse {
-  NSArray* records = [jsonResponse objectForKey:@"records"];
-  NSLog(@"request:didLoadResponse: #records: %lu", (unsigned long)records.count);
-  NSLog(@"%@",records);
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [self dismiss];
+  });
 }
-
 
 - (void)request:(SFRestRequest*)request didFailLoadWithError:(NSError*)error {
   NSLog(@"request:didFailLoadWithError: %@", error);

@@ -22,6 +22,8 @@
   if (self) {
     self.backgroundColor = [HDColor colorPrimary];
     
+    CGSize viewSize = self.frame.size;
+    
     CGFloat titleSize = 18.0;
     CGRect titleLabelBounds = { 0, 0, frame.size.width, titleSize * 1.25 };
     self.titleLabel = [[UILabel alloc] init];
@@ -50,6 +52,13 @@
     self.cancelButton.center = CGPointMake(10.0 + callButtonSize.width / 2.0, 5.0 + self.center.y);
     [self.cancelButton setImage:[UIImage imageNamed:@"CancelIcon"] forState:UIControlStateNormal];
     [self addSubview:self.cancelButton];
+    
+    _doneButton = [[UIButton alloc] init];
+    self.doneButton.bounds = CGRectMake(0, 0, callButtonSize.width, callButtonSize.height);
+    self.doneButton.center = CGPointMake(viewSize.width - callButtonSize.width / 2.0 - 20.0, 5.0 + self.center.y);
+    [self.doneButton setImage:[UIImage imageNamed:@"DoneButton"] forState:UIControlStateNormal];
+    [self addSubview:self.doneButton];
+    self.doneButton.hidden = YES;
     
   }
   return self;

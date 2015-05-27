@@ -5,47 +5,27 @@
 //  Created by Marshall Moutenot on 4/19/15.
 //  Copyright (c) 2015 HighDial. All rights reserved.
 //
-#import "HDCallFlowCardViewController.h"
+#import "HDOptionsCardViewController.h"
 #import "HDCallFlowOptionCell.h"
 #import "HDOption.h"
 
-static CGFloat kCardViewTitleMarginVertical = 25.0;
-static CGFloat kCardViewTitleMarginHorizontal = 40.0;
-static CGFloat kCardViewOptionMaxPerRow = 5.0;
 static NSString* kCardViewOptionCellIdentifier = @"HDCallFlowOptionCell";
 
-@interface HDCallFlowCardViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface HDOptionsCardViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic) NSString* key;
 @property (nonatomic) NSArray* options;
-@property (nonatomic) UILabel* titleLabel;
 @property (nonatomic) UICollectionView* optionCollectionView;
-@property (nonatomic) NSObject<HDCardHandlerDelegate>* delegate;
 
 @end
 
-@implementation HDCallFlowCardViewController
+@implementation HDOptionsCardViewController
 
 - (instancetype)initWithFrame:(CGRect)frame key:(NSString*)key title:(NSString*)title options:(NSArray*)options delegate:(NSObject<HDCardHandlerDelegate>*)delegate {
-  self = [super init];
+  self = [super initWithFrame:frame key:key title:title delegate:delegate];
   if (self) {
-    _key = key;
     _options = options;
-    _delegate = delegate;
     
-    self.view.frame = frame;
-    CGSize viewSize = self.view.frame.size;
-    self.view.backgroundColor = [HDColor whiteColor];
-    self.view.layer.cornerRadius = 4.0;
-    self.view.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.view.layer.borderWidth = 1.0;
-    
-    CGRect titleLabelFrame = {kCardViewTitleMarginHorizontal, kCardViewTitleMarginVertical, viewSize.width - kCardViewTitleMarginHorizontal * 2, 50.0};
-    self.titleLabel = [[UILabel alloc] initWithFrame:titleLabelFrame];
-    self.titleLabel.text = title;
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.numberOfLines = 0;
-    [self.view addSubview:self.titleLabel];
+    CGSize viewSize = self.view.bounds.size;
     
     UICollectionViewFlowLayout* optionCollectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     CGFloat optionItemWidth = viewSize.width;
@@ -55,6 +35,7 @@ static NSString* kCardViewOptionCellIdentifier = @"HDCallFlowOptionCell";
     optionCollectionFlowLayout.minimumInteritemSpacing = 0.0;
     optionCollectionFlowLayout.minimumLineSpacing = 20.0;
     
+    CGRect titleLabelFrame = self.titleLabel.frame;
     CGFloat optionCollectionY = titleLabelFrame.origin.y + titleLabelFrame.size.height;
     CGRect optionCollectionFrame = { 0, optionCollectionY, viewSize.width, viewSize.height - optionCollectionY - 20.0 };
     self.optionCollectionView = [[UICollectionView alloc] initWithFrame:optionCollectionFrame collectionViewLayout:optionCollectionFlowLayout];

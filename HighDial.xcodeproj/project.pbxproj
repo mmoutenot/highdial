@@ -11,6 +11,9 @@
 		311C47AD1ABF2AC3006A359D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311C47AA1ABF2AC3006A359D /* Crashlytics.framework */; };
 		311C47AE1ABF2AC3006A359D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311C47AB1ABF2AC3006A359D /* Fabric.framework */; };
 		311C47AF1ABF2AC3006A359D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 311C47AC1ABF2AC3006A359D /* libc++.dylib */; };
+		314E6AD31B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 314E6AD21B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m */; };
+		314E6AD61B10C079004F3DFC /* HDCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 314E6AD51B10C079004F3DFC /* HDCardViewController.m */; };
+		314E6AD91B10D271004F3DFC /* HDSuccessBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 314E6AD81B10D271004F3DFC /* HDSuccessBadgeView.m */; };
 		31A4308A1B04215300CC88E1 /* HDColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A430891B04215300CC88E1 /* HDColor.m */; };
 		31B56AB51AD34CA800319997 /* HDFlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B56AB41AD34CA800319997 /* HDFlatButton.m */; };
 		31D00CE41AEABCDC00910612 /* HDCallFlowOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D00CE31AEABCDC00910612 /* HDCallFlowOptionCell.m */; };
@@ -18,7 +21,7 @@
 		31D00CED1AEACBDB00910612 /* HDCallFlowHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D00CEC1AEACBDB00910612 /* HDCallFlowHeaderView.m */; };
 		31D00CF81AEAD91200910612 /* HDDismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D00CF51AEAD91200910612 /* HDDismissingAnimator.m */; };
 		31D00CF91AEAD91200910612 /* HDPresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D00CF71AEAD91200910612 /* HDPresentingAnimator.m */; };
-		31E5F2C51AE4426600152946 /* HDCallFlowCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5F2C41AE4426600152946 /* HDCallFlowCardViewController.m */; };
+		31E5F2C51AE4426600152946 /* HDOptionsCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E5F2C41AE4426600152946 /* HDOptionsCardViewController.m */; };
 		4F3F413517E7CA5C008B3283 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F413417E7CA5C008B3283 /* ImageIO.framework */; };
 		4F3F413617E7CA71008B3283 /* libMKNetworkKit-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F412B17E7C9CA008B3283 /* libMKNetworkKit-iOS.a */; };
 		4F3F413717E7CA84008B3283 /* libSalesforceNetworkSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F413317E7C9CA008B3283 /* libSalesforceNetworkSDK.a */; };
@@ -62,6 +65,12 @@
 		311C47AA1ABF2AC3006A359D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		311C47AB1ABF2AC3006A359D /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		311C47AC1ABF2AC3006A359D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		314E6AD11B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDCallFlowNoteCardViewController.h; sourceTree = "<group>"; };
+		314E6AD21B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDCallFlowNoteCardViewController.m; sourceTree = "<group>"; };
+		314E6AD41B10C079004F3DFC /* HDCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = HDCardViewController.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
+		314E6AD51B10C079004F3DFC /* HDCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = HDCardViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
+		314E6AD71B10D271004F3DFC /* HDSuccessBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDSuccessBadgeView.h; sourceTree = "<group>"; };
+		314E6AD81B10D271004F3DFC /* HDSuccessBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDSuccessBadgeView.m; sourceTree = "<group>"; };
 		31A430881B04215300CC88E1 /* HDColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDColor.h; sourceTree = "<group>"; };
 		31A430891B04215300CC88E1 /* HDColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDColor.m; sourceTree = "<group>"; };
 		31A4308B1B0425F800CC88E1 /* HDPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDPrefixHeader.pch; sourceTree = "<group>"; };
@@ -77,8 +86,8 @@
 		31D00CF51AEAD91200910612 /* HDDismissingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDismissingAnimator.m; sourceTree = "<group>"; };
 		31D00CF61AEAD91200910612 /* HDPresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDPresentingAnimator.h; sourceTree = "<group>"; };
 		31D00CF71AEAD91200910612 /* HDPresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDPresentingAnimator.m; sourceTree = "<group>"; };
-		31E5F2C31AE4426600152946 /* HDCallFlowCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDCallFlowCardViewController.h; sourceTree = "<group>"; };
-		31E5F2C41AE4426600152946 /* HDCallFlowCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDCallFlowCardViewController.m; sourceTree = "<group>"; };
+		31E5F2C31AE4426600152946 /* HDOptionsCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDOptionsCardViewController.h; sourceTree = "<group>"; };
+		31E5F2C41AE4426600152946 /* HDOptionsCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDOptionsCardViewController.m; sourceTree = "<group>"; };
 		4677B83773F90E0B4DF81870 /* libPods-HighDial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HighDial.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3F412517E7C9CA008B3283 /* MKNetworkEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKNetworkEngine.h; sourceTree = "<group>"; };
 		4F3F412617E7C9CA008B3283 /* MKNetworkKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKNetworkKit.h; sourceTree = "<group>"; };
@@ -450,8 +459,10 @@
 			children = (
 				824A9E311724E2A900C9BD79 /* AppDelegate.h */,
 				824A9E321724E2A900C9BD79 /* AppDelegate.m */,
-				31E5F2C31AE4426600152946 /* HDCallFlowCardViewController.h */,
-				31E5F2C41AE4426600152946 /* HDCallFlowCardViewController.m */,
+				314E6AD41B10C079004F3DFC /* HDCardViewController.h */,
+				314E6AD51B10C079004F3DFC /* HDCardViewController.m */,
+				31E5F2C31AE4426600152946 /* HDOptionsCardViewController.h */,
+				31E5F2C41AE4426600152946 /* HDOptionsCardViewController.m */,
 				31D00CEB1AEACBDB00910612 /* HDCallFlowHeaderView.h */,
 				31D00CEC1AEACBDB00910612 /* HDCallFlowHeaderView.m */,
 				31D00CE21AEABCDC00910612 /* HDCallFlowOptionCell.h */,
@@ -471,6 +482,10 @@
 				31D00CF71AEAD91200910612 /* HDPresentingAnimator.m */,
 				824A9E341724E45000C9BD79 /* HDRootViewController.h */,
 				824A9E351724E45100C9BD79 /* HDRootViewController.m */,
+				314E6AD11B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.h */,
+				314E6AD21B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m */,
+				314E6AD71B10D271004F3DFC /* HDSuccessBadgeView.h */,
+				314E6AD81B10D271004F3DFC /* HDSuccessBadgeView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -873,13 +888,16 @@
 			files = (
 				3115F2E61AC3A8C6003744C0 /* HDCallFlowViewController.m in Sources */,
 				31D00CED1AEACBDB00910612 /* HDCallFlowHeaderView.m in Sources */,
+				314E6AD91B10D271004F3DFC /* HDSuccessBadgeView.m in Sources */,
+				314E6AD31B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m in Sources */,
 				31D00CF91AEAD91200910612 /* HDPresentingAnimator.m in Sources */,
+				314E6AD61B10C079004F3DFC /* HDCardViewController.m in Sources */,
 				31B56AB51AD34CA800319997 /* HDFlatButton.m in Sources */,
 				31D00CE71AEABD6E00910612 /* HDOption.m in Sources */,
 				824A9DE51724E16400C9BD79 /* main.m in Sources */,
 				31D00CE41AEABCDC00910612 /* HDCallFlowOptionCell.m in Sources */,
 				31A4308A1B04215300CC88E1 /* HDColor.m in Sources */,
-				31E5F2C51AE4426600152946 /* HDCallFlowCardViewController.m in Sources */,
+				31E5F2C51AE4426600152946 /* HDOptionsCardViewController.m in Sources */,
 				824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */,
 				31D00CF81AEAD91200910612 /* HDDismissingAnimator.m in Sources */,
 				824A9E361724E45100C9BD79 /* HDRootViewController.m in Sources */,

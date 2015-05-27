@@ -6,15 +6,9 @@
 //  Copyright (c) 2015 HighDial. All rights reserved.
 //
 
-@class HDOption;
+#import "HDCardViewController.h"
 
-@protocol HDCardHandlerDelegate <NSObject>
-
-- (void)optionSelected:(HDOption*)option forKey:(NSString*)key;
-
-@end
-
-@interface HDCallFlowCardViewController : UIViewController
+@interface HDOptionsCardViewController : HDCardViewController
 
 - (instancetype)initWithFrame:(CGRect)frame key:(NSString*)key title:(NSString*)title options:(NSArray*)options delegate:(NSObject<UIViewControllerTransitioningDelegate>*)delegate;
   
