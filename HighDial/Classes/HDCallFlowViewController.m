@@ -18,6 +18,7 @@
 #import "HDSuccessBadgeView.h"
 #import "SFRestAPI.h"
 #import "SFRestRequest.h"
+#import "SFDateUtil.h"
 
 static CGFloat kCallFlowViewHeaderHeight = 80.0;
 
@@ -190,7 +191,7 @@ static NSString* const notesCardKey = @"notes";
     followUp = [NSString stringWithFormat:@"Follow up via %@ %@", self.callData[nextStepsCardKey], self.callData[whenCardKey]];
   }
   
-  NSDictionary* taskParams = @{
+  NSDictionary* callTaskParams = @{
     @"WhoId": contactData[@"Id"],
     @"Subject": subject,
     @"Status": @"Completed",
@@ -198,8 +199,60 @@ static NSString* const notesCardKey = @"notes";
     @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n%@\n\n--\nLogged with Highdial", rating, followUp, duration, notes]
   };
   
-  SFRestRequest* request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Task" fields:taskParams];
+  SFRestRequest* request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Task" fields:callTaskParams];
   
+  [[SFRestAPI sharedInstance] send:request delegate:self];
+  
+  [self logReminder];
+}
+
+- (void)logReminder {
+  NSDictionary* contactData = self.callData[@"contact"];
+  
+  NSString* followUpMethod;
+  if ([self.callData[nextStepsCardKey] isEqualToString:@"phone"]) {
+    followUpMethod = @"Call";
+  } else if ([self.callData[nextStepsCardKey] isEqualToString:@"email"]) {
+    followUpMethod = @"Email";
+  } else {
+    NSLog(@"invalid reminder - no follow up");
+    return;
+  }
+  
+  NSInteger timeFromNow;
+  if ([self.callData[whenCardKey] isEqualToString:@"later today"]) {
+    // 3 hours
+    timeFromNow = 10800;
+  } else if ([self.callData[whenCardKey] isEqualToString:@"tomorrow"]) {
+    // 23 hours
+    timeFromNow = 82800;
+  } else if ([self.callData[whenCardKey] isEqualToString:@"next week"]) {
+    // 1 week
+    timeFromNow = 604800;
+  } else if ([self.callData[whenCardKey] isEqualToString:@"next month"]) {
+    // 28 days
+    timeFromNow = 2246400;
+  } else {
+    NSLog(@"invalid reminder - no time given");
+    return;
+  }
+  
+  NSDate* reminderDate = [[NSDate date] dateByAddingTimeInterval:timeFromNow];
+  NSString* serializedReminderDate = [SFDateUtil toSOQLDateTimeString:reminderDate isDateTime:YES];
+  
+  NSString* subject = [NSString stringWithFormat:@"Follow-up: %@ %@", followUpMethod, contactData[@"Name"]];
+  NSString* notes = [NSString stringWithFormat:@"Notes: %@", self.callData[notesCardKey]];
+  NSDateComponents* components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+  NSString* dayMonthYear = [NSString stringWithFormat:@"%i/%i/%i", components.day, components.month, components.year];
+  
+  NSDictionary* reminderTaskParams = @{
+    @"WhoId": contactData[@"Id"],
+    @"ActivityDate": serializedReminderDate,
+    @"Subject": subject,
+    @"Description": [NSString stringWithFormat:@"%@\n\nLast phone call: %@\n\nLast call duration: %@\n\n--\nLogged with Highdial", notes, dayMonthYear, self.callData[@"durationString"]]
+  };
+  
+  SFRestRequest* request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Task" fields:reminderTaskParams];
   [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
