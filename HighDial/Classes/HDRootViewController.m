@@ -52,7 +52,7 @@
   
   NSArray* types = @[@"Lead", @"Contact"];
   for (NSString* type in types) {
-    NSString* query = [NSString stringWithFormat:@"SELECT Id, Name, MobilePhone FROM %@", type];
+    NSString* query = [NSString stringWithFormat:@"SELECT Id, Name, MobilePhone, Phone FROM %@ WHERE MobilePhone != null OR Phone != null", type];
     SFRestRequest* request = [[SFRestAPI sharedInstance] requestForQuery:query];
     [[SFRestAPI sharedInstance] send:request delegate:self];
   }
@@ -176,11 +176,20 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  NSCharacterSet* illegalCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890*#"] invertedSet];
-  NSString* phoneNumber = [[self.contacts[indexPath.item][@"MobilePhone"] componentsSeparatedByCharactersInSet:illegalCharSet] componentsJoinedByString:@""];
-  
+  NSString* phoneNumber = [self phoneNumberForContact:self.contacts[indexPath.item]];
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@", phoneNumber]]];
   self.callingState = @"willPromptCall";
+}
+
+#pragma mark - Contact Management
+
+- (NSString*)phoneNumberForContact:(NSDictionary*)contact {
+  NSCharacterSet* illegalCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890*#"] invertedSet];
+  NSString* phoneNumber = contact[@"Phone"] ? contact[@"Phone"] : contact[@"MobilePhone"];
+  if (phoneNumber) {
+    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:illegalCharSet] componentsJoinedByString:@""];
+  }
+  return phoneNumber;
 }
 
 #pragma mark - Calling state
