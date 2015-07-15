@@ -23,7 +23,7 @@
 static CGFloat kCallFlowViewHeaderHeight = 80.0;
 
 static NSString* const reachableCardKey = @"reachable";
-static NSString* const callRatingCardKey = @"callRatin";
+//static NSString* const callRatingCardKey = @"callRating";
 static NSString* const whoReachedCardKey = @"whoReached";
 static NSString* const nextStepsCardKey = @"nextSteps";
 static NSString* const whenCardKey = @"when";
@@ -55,7 +55,7 @@ static NSString* const notesCardKey = @"notes";
     NSDictionary* reachableCard = @{
       @"header": [NSString stringWithFormat:@"Did you talk with %@?", contactName],
       @"options": @[
-        [[HDOption alloc] initWithText:@"Yes" icon:[UIImage imageNamed:@"ContactIcon"] nextKey:callRatingCardKey logString:@"Connected"],
+        [[HDOption alloc] initWithText:@"Yes" icon:[UIImage imageNamed:@"ContactIcon"] nextKey:nextStepsCardKey logString:@"Connected"],
         [[HDOption alloc] initWithText:@"No" icon:[UIImage imageNamed:@"NoIcon"] nextKey:whoReachedCardKey logString:@"Not Reached"]
       ]
     };
@@ -71,17 +71,17 @@ static NSString* const notesCardKey = @"notes";
     };
     [self.flowCards setObject:whoReachedCard forKey:whoReachedCardKey];
     
-    NSDictionary* callRatingCard = @{
-      @"header": @"How would you rate the call?",
-      @"options": @[
-        [[HDOption alloc] initWithText:@"Great" icon:[UIImage imageNamed:@"GreatIcon"] nextKey:nextStepsCardKey logString:@"4/4"],
-        [[HDOption alloc] initWithText:@"Good" icon:[UIImage imageNamed:@"GoodIcon"] nextKey:nextStepsCardKey logString:@"3/4"],
-        [[HDOption alloc] initWithText:@"Okay" icon:[UIImage imageNamed:@"OkayIcon"] nextKey:nextStepsCardKey logString:@"2/4"],
-        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"NotGoodIcon"] nextKey:nextStepsCardKey logString:@"1/4"]
-      ]
-    };
-    [self.flowCards setObject:callRatingCard forKey:callRatingCardKey];
-    
+//    NSDictionary* callRatingCard = @{
+//      @"header": @"How would you rate the call?",
+//      @"options": @[
+//        [[HDOption alloc] initWithText:@"Great" icon:[UIImage imageNamed:@"GreatIcon"] nextKey:nextStepsCardKey logString:@"4/4"],
+//        [[HDOption alloc] initWithText:@"Good" icon:[UIImage imageNamed:@"GoodIcon"] nextKey:nextStepsCardKey logString:@"3/4"],
+//        [[HDOption alloc] initWithText:@"Okay" icon:[UIImage imageNamed:@"OkayIcon"] nextKey:nextStepsCardKey logString:@"2/4"],
+//        [[HDOption alloc] initWithText:@"Bad" icon:[UIImage imageNamed:@"NotGoodIcon"] nextKey:nextStepsCardKey logString:@"1/4"]
+//      ]
+//    };
+//    [self.flowCards setObject:callRatingCard forKey:callRatingCardKey];
+
     NSDictionary* nextStepsCard = @{
       @"header": @"Next steps?",
       @"options": @[
@@ -183,7 +183,7 @@ static NSString* const notesCardKey = @"notes";
   
   NSDictionary* contactData = self.callData[@"contact"];
   NSString* subject = [NSString stringWithFormat:@"Call - %@", self.callData[reachableCardKey]];
-  NSString* rating = [NSString stringWithFormat:@"Rating: %@", self.callData[callRatingCardKey]];
+//  NSString* rating = [NSString stringWithFormat:@"Rating: %@", self.callData[callRatingCardKey]];
   NSString* followUp = @"No follow up needed.";
   NSString* duration = [NSString stringWithFormat:@"Duration: %@", self.callData[@"durationString"]];
   NSString* notes = [NSString stringWithFormat:@"Notes: %@", self.callData[notesCardKey]];
@@ -196,7 +196,7 @@ static NSString* const notesCardKey = @"notes";
     @"Subject": subject,
     @"Status": @"Completed",
     @"CallDurationInSeconds": self.callData[@"duration"],
-    @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n%@\n\n--\nLogged with Highdial", rating, followUp, duration, notes]
+    @"Description": [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n\n--\nLogged with Highdial", followUp, duration, notes]
   };
   
   SFRestRequest* request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Task" fields:callTaskParams];
