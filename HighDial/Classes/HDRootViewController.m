@@ -89,7 +89,7 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
   [self.filteredContacts removeAllObjects];
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.Name contains[c] %@", searchText];
+  NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF.Name contains[c] %@", searchText];
   self.filteredContacts = [NSMutableArray arrayWithArray:[self.contacts filteredArrayUsingPredicate:predicate]];
   NSLog(@"%lu", (unsigned long)self.filteredContacts.count);
 }
