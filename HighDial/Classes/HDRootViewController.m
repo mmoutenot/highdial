@@ -52,7 +52,7 @@
   
   NSArray* types = @[@"Lead", @"Contact"];
   for (NSString* type in types) {
-    NSString* query = [NSString stringWithFormat:@"SELECT Id, Name, MobilePhone, Phone FROM %@ WHERE MobilePhone != null OR Phone != null", type];
+    NSString* query = [NSString stringWithFormat:@"SELECT Id, Name, MobilePhone, Phone, Company FROM %@ WHERE MobilePhone != null OR Phone != null", type];
     SFRestRequest* request = [[SFRestAPI sharedInstance] requestForQuery:query];
     [[SFRestAPI sharedInstance] send:request delegate:self];
   }
@@ -149,8 +149,7 @@
   // Dequeue or create a cell of the appropriate type.
   UITableViewCell* cell = [tableView_ dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   }
   
   NSDictionary* obj;
@@ -164,7 +163,8 @@
   UIImage* image = [UIImage imageNamed:@"icon.png"];
   cell.imageView.image = image;
   
-  cell.textLabel.text =  [obj objectForKey:@"Name"];
+  cell.textLabel.text = [obj objectForKey:@"Name"];
+  cell.detailTextLabel.text = [obj objectForKey:@"Company"];
   
   //this adds the arrow to the right hand side.
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
