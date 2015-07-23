@@ -1,6 +1,13 @@
-#import <UIKit/UIKit.h>
-#import "SFRestAPI.h"
+//
+//  HDRootViewController.h
+//  HighDial
+//
+//  Created by Marshall Moutenot on 7/21/15.
+//  Copyright (c) 2015 HighDial. All rights reserved.
+//
 
-@interface HDRootViewController : UITableViewController <SFRestDelegate>
+#import <UIKit/UIKit.h>
+
+@interface HDRootViewController : UIViewController
 
 @end

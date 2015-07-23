@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "HDRootViewController.h"
+#import "HDContactListViewController.h"
   
 static NSString* const RemoteAccessConsumerKey = @"3MVG9sG9Z3Q1RlbflJ2Y5ohJyWzuuz.M5GSsf9NdmN3I.zY1IEW2pSMdfFIxHlkAvzsb8QTZFO0d_xYj7N_nK";
 static NSString* const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/done";
@@ -26,6 +27,8 @@ static NSString* const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/d
  * (Re-)sets the view state when the app first loads (or post-logout).
  */
 - (void)initializeAppViewState;
+
+@property (nonatomic) UINavigationController* navigationController;
 
 @end
 
@@ -45,7 +48,7 @@ static NSString* const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/d
     __weak AppDelegate *weakSelf = self;
     [SalesforceSDKManager sharedManager].postLaunchAction = ^(SFSDKLaunchAction launchActionList) {
       [weakSelf log:SFLogLevelInfo format:@"Post-launch: launch actions taken: %@", [SalesforceSDKManager launchActionsStringRepresentation:launchActionList]];
-      [weakSelf setupRootViewController];
+      [weakSelf presentRootAuthenticatedViewController];
     };
     [SalesforceSDKManager sharedManager].launchErrorAction = ^(NSError *error, SFSDKLaunchAction launchActionList) {
       [weakSelf log:SFLogLevelError format:@"Error during SDK launch: %@", [error localizedDescription]];
@@ -64,21 +67,16 @@ static NSString* const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/d
 }
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   [self initializeAppViewState];
   
   [Intercom setApiKey:@"ios_sdk-88a79a61d5d3ec6fe21c55ad084e0d5080fa8016" forAppId:@"t3a13atb"];
-  
   [Fabric with:@[CrashlyticsKit]];
-  // If you wish to register for push notifications, uncomment the line below.  Note that,
-  // if you want to receive push notifications from Salesforce, you will also need to
-  // implement the application:didRegisterForRemoteNotificationsWithDeviceToken: method (below).
-  //
-  //[[SFPushNotificationManager sharedInstance] registerForRemoteNotifications];
-  //
-  
-  [[SalesforceSDKManager sharedManager] launch];
+  HDRootViewController* rootVC = [[HDRootViewController alloc] init];
+  self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootVC];
+  self.navigationController.navigationBarHidden = YES;
+  self.window.rootViewController = self.navigationController;
+
   return YES;
 }
 
@@ -103,14 +101,13 @@ static NSString* const OAuthRedirectURI = @"testsfdc:///mobilesdk/detect/oauth/d
   [self.window makeKeyAndVisible];
 }
 
-- (void)setupRootViewController {
+- (void)presentRootAuthenticatedViewController {
   SFUserAccount* user = [SFUserAccountManager sharedInstance].currentUser;
   [Intercom registerUserWithUserId:user.idData.userId];
   [Intercom updateUserWithAttributes:@{ @"email": user.email, @"name": user.fullName }];
-  
-  HDRootViewController* rootVC = [[HDRootViewController alloc] initWithNibName:nil bundle:nil];
-  UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:rootVC];
-  self.window.rootViewController = navVC;
+
+  HDContactListViewController* rootVC = [[HDContactListViewController alloc] initWithNibName:nil bundle:nil];
+  [self.navigationController presentViewController:rootVC animated:YES completion:nil];
 }
 
 - (void)resetViewState:(void (^)(void))postResetBlock {

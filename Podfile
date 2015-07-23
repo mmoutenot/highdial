@@ -7,6 +7,7 @@ pod 'ReactiveCocoa'
 pod 'pop'
 pod 'Intercom'
 pod 'OpenSans'
+pod 'AsyncDisplayKit'
 
 end
 

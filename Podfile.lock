@@ -1,4 +1,7 @@
 PODS:
+  - AsyncDisplayKit (1.2.2):
+    - AsyncDisplayKit/ASDealloc2MainObject (= 1.2.2)
+  - AsyncDisplayKit/ASDealloc2MainObject (1.2.2)
   - Intercom (2.2.2)
   - OpenSans (1.0.3)
   - pop (1.0.7)
@@ -11,15 +14,17 @@ PODS:
     - ReactiveCocoa/Core
 
 DEPENDENCIES:
+  - AsyncDisplayKit
   - Intercom
   - OpenSans
   - pop
   - ReactiveCocoa
 
 SPEC CHECKSUMS:
+  AsyncDisplayKit: 6b943f45844558fde1d82468820dbefcc77c7271
   Intercom: 221cda56693d6e31fd3edf4979729cdd2920363a
   OpenSans: 33078846463eae780aa5f82986b51cce085f970d
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2

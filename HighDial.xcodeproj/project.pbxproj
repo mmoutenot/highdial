@@ -14,6 +14,10 @@
 		314E6AD31B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 314E6AD21B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m */; };
 		314E6AD61B10C079004F3DFC /* HDCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 314E6AD51B10C079004F3DFC /* HDCardViewController.m */; };
 		314E6AD91B10D271004F3DFC /* HDSuccessBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 314E6AD81B10D271004F3DFC /* HDSuccessBadgeView.m */; };
+		316AA4CF1B6079F300DDC85C /* HDButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 316AA4CE1B6079F300DDC85C /* HDButton.m */; };
+		316AA4D21B607C7800DDC85C /* HDRegisterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 316AA4D11B607C7800DDC85C /* HDRegisterNode.m */; };
+		316DAA6D1B5F24D7003A538F /* HDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316DAA6C1B5F24D7003A538F /* HDRootViewController.m */; };
+		316DAA781B5F2C29003A538F /* HDSplashNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 316DAA761B5F2C29003A538F /* HDSplashNode.m */; };
 		31A4308A1B04215300CC88E1 /* HDColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A430891B04215300CC88E1 /* HDColor.m */; };
 		31B56AB51AD34CA800319997 /* HDFlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B56AB41AD34CA800319997 /* HDFlatButton.m */; };
 		31D00CE41AEABCDC00910612 /* HDCallFlowOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D00CE31AEABCDC00910612 /* HDCallFlowOptionCell.m */; };
@@ -34,7 +38,7 @@
 		824A9DE31724E16400C9BD79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 824A9DE11724E16400C9BD79 /* InfoPlist.strings */; };
 		824A9DE51724E16400C9BD79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 824A9DE41724E16400C9BD79 /* main.m */; };
 		824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 824A9E321724E2A900C9BD79 /* AppDelegate.m */; };
-		824A9E361724E45100C9BD79 /* HDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824A9E351724E45100C9BD79 /* HDRootViewController.m */; };
+		824A9E361724E45100C9BD79 /* HDContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 824A9E351724E45100C9BD79 /* HDContactListViewController.m */; };
 		824A9E3F1724EC6300C9BD79 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 824A9E3E1724EC6300C9BD79 /* Settings.bundle */; };
 		824A9E411724ECC600C9BD79 /* SalesforceSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 824A9E401724ECC600C9BD79 /* SalesforceSDKResources.bundle */; };
 		824A9FDD1725079100C9BD79 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 824A9F321725079000C9BD79 /* libcrypto.a */; };
@@ -71,6 +75,14 @@
 		314E6AD51B10C079004F3DFC /* HDCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = HDCardViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		314E6AD71B10D271004F3DFC /* HDSuccessBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDSuccessBadgeView.h; sourceTree = "<group>"; };
 		314E6AD81B10D271004F3DFC /* HDSuccessBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDSuccessBadgeView.m; sourceTree = "<group>"; };
+		316AA4CD1B6079F300DDC85C /* HDButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDButton.h; sourceTree = "<group>"; };
+		316AA4CE1B6079F300DDC85C /* HDButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDButton.m; sourceTree = "<group>"; };
+		316AA4D01B607C7800DDC85C /* HDRegisterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDRegisterNode.h; sourceTree = "<group>"; };
+		316AA4D11B607C7800DDC85C /* HDRegisterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDRegisterNode.m; sourceTree = "<group>"; };
+		316DAA6B1B5F24D7003A538F /* HDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDRootViewController.h; sourceTree = "<group>"; };
+		316DAA6C1B5F24D7003A538F /* HDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDRootViewController.m; sourceTree = "<group>"; };
+		316DAA761B5F2C29003A538F /* HDSplashNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDSplashNode.m; sourceTree = "<group>"; };
+		316DAA771B5F2C29003A538F /* HDSplashNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDSplashNode.h; sourceTree = "<group>"; };
 		31A430881B04215300CC88E1 /* HDColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDColor.h; sourceTree = "<group>"; };
 		31A430891B04215300CC88E1 /* HDColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDColor.m; sourceTree = "<group>"; };
 		31A4308B1B0425F800CC88E1 /* HDPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDPrefixHeader.pch; sourceTree = "<group>"; };
@@ -133,8 +145,8 @@
 		824A9DE61724E16400C9BD79 /* HighDial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HighDial-Prefix.pch"; sourceTree = "<group>"; };
 		824A9E311724E2A900C9BD79 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		824A9E321724E2A900C9BD79 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		824A9E341724E45000C9BD79 /* HDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDRootViewController.h; sourceTree = "<group>"; };
-		824A9E351724E45100C9BD79 /* HDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDRootViewController.m; sourceTree = "<group>"; };
+		824A9E341724E45000C9BD79 /* HDContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDContactListViewController.h; sourceTree = "<group>"; };
+		824A9E351724E45100C9BD79 /* HDContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDContactListViewController.m; sourceTree = "<group>"; };
 		824A9E3E1724EC6300C9BD79 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		824A9E401724ECC600C9BD79 /* SalesforceSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SalesforceSDKResources.bundle; sourceTree = "<group>"; };
 		824A9F321725079000C9BD79 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
@@ -480,12 +492,20 @@
 				31A4308B1B0425F800CC88E1 /* HDPrefixHeader.pch */,
 				31D00CF61AEAD91200910612 /* HDPresentingAnimator.h */,
 				31D00CF71AEAD91200910612 /* HDPresentingAnimator.m */,
-				824A9E341724E45000C9BD79 /* HDRootViewController.h */,
-				824A9E351724E45100C9BD79 /* HDRootViewController.m */,
+				824A9E341724E45000C9BD79 /* HDContactListViewController.h */,
+				824A9E351724E45100C9BD79 /* HDContactListViewController.m */,
 				314E6AD11B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.h */,
 				314E6AD21B10BCC1004F3DFC /* HDCallFlowNoteCardViewController.m */,
 				314E6AD71B10D271004F3DFC /* HDSuccessBadgeView.h */,
 				314E6AD81B10D271004F3DFC /* HDSuccessBadgeView.m */,
+				316DAA6B1B5F24D7003A538F /* HDRootViewController.h */,
+				316DAA6C1B5F24D7003A538F /* HDRootViewController.m */,
+				316DAA761B5F2C29003A538F /* HDSplashNode.m */,
+				316DAA771B5F2C29003A538F /* HDSplashNode.h */,
+				316AA4CD1B6079F300DDC85C /* HDButton.h */,
+				316AA4CE1B6079F300DDC85C /* HDButton.m */,
+				316AA4D01B607C7800DDC85C /* HDRegisterNode.h */,
+				316AA4D11B607C7800DDC85C /* HDRegisterNode.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -891,6 +911,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				316DAA6D1B5F24D7003A538F /* HDRootViewController.m in Sources */,
 				3115F2E61AC3A8C6003744C0 /* HDCallFlowViewController.m in Sources */,
 				31D00CED1AEACBDB00910612 /* HDCallFlowHeaderView.m in Sources */,
 				314E6AD91B10D271004F3DFC /* HDSuccessBadgeView.m in Sources */,
@@ -900,12 +921,15 @@
 				31B56AB51AD34CA800319997 /* HDFlatButton.m in Sources */,
 				31D00CE71AEABD6E00910612 /* HDOption.m in Sources */,
 				824A9DE51724E16400C9BD79 /* main.m in Sources */,
+				316DAA781B5F2C29003A538F /* HDSplashNode.m in Sources */,
 				31D00CE41AEABCDC00910612 /* HDCallFlowOptionCell.m in Sources */,
 				31A4308A1B04215300CC88E1 /* HDColor.m in Sources */,
 				31E5F2C51AE4426600152946 /* HDOptionsCardViewController.m in Sources */,
 				824A9E331724E2A900C9BD79 /* AppDelegate.m in Sources */,
+				316AA4CF1B6079F300DDC85C /* HDButton.m in Sources */,
+				316AA4D21B607C7800DDC85C /* HDRegisterNode.m in Sources */,
 				31D00CF81AEAD91200910612 /* HDDismissingAnimator.m in Sources */,
-				824A9E361724E45100C9BD79 /* HDRootViewController.m in Sources */,
+				824A9E361724E45100C9BD79 /* HDContactListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
