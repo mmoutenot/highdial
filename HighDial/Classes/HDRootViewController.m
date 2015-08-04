@@ -5,6 +5,7 @@
 //  Created by Marshall Moutenot on 7/21/15.
 //  Copyright (c) 2015 HighDial. All rights reserved.
 //
+#import <Intercom/Intercom.h>
 #import <SalesforceSDKCore/SFAuthenticationManager.h>
 #import <SalesforceSDKCore/SalesforceSDKManager.h>
 
@@ -38,7 +39,6 @@
     
     [self.splashNode.continueButton addTarget:self action:@selector(splashContinuePressed) forControlEvents:ASControlNodeEventTouchUpInside];
     
-    
     [self.view addSubnode:self.splashNode];
   }
 }
@@ -63,7 +63,23 @@
 }
 
 - (void)registerContinuePressed {
-  
+  UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Agree to Privacy Policy" message:@"By creating an account you agree to our privacy policy" preferredStyle:UIAlertControllerStyleAlert];
+
+  UIAlertAction* disagreeAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+  }];
+
+  UIAlertAction* agreeAction = [UIAlertAction actionWithTitle:@"I agree" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    [Intercom registerUserWithEmail:self.registerNode.emailField.text];
+    [Intercom updateUserWithAttributes:@{ @"Name": self.registerNode.fullNameField.text, @"Password": self.registerNode.passwordField }];
+
+    HDContactListViewController* contactListViewController = [[HDContactListViewController alloc] init];
+    [self.navigationController pushViewController:contactListViewController animated:YES];
+  }];
+
+  [alert addAction:disagreeAction];
+  [alert addAction:agreeAction];
+
+  [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
